@@ -41,7 +41,7 @@ describe('Main LXD Api endpoints', function() {
     it('Should update server info', function() {
       return client.updateServerInfo({
         config: {
-          'trust-password': false
+          'core.trust_password': ''
         }
       }).then(function(res) {
         expect(res.status).to.be.equal('Success');
@@ -55,7 +55,6 @@ describe('Main LXD Api endpoints', function() {
     it('Should create a container', function() {
       return client.createContainer({
         name: container,
-        architecture: 'x86_64',
         profiles: ['default'],
         source: {
           type: 'image',
@@ -101,8 +100,14 @@ describe('Main LXD Api endpoints', function() {
         expect(res.status).to.be.equal('OK');
 
         return client.waitOperation(res);
-      }).then(function(res){
-        console.log(res);
+      });
+    });
+
+    it('Should delete a container', function() {
+      return client.deleteContainer(container + '-new').then(function(res) {
+        expect(res.status).to.be.equal('OK');
+
+        return client.waitOperation(res);
       });
     });
 

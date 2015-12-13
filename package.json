@@ -4,7 +4,9 @@
   "description": "LXD remote client for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha --timeout 600000 test/**/*-test.js"
+    "pretest": "npm install",
+    "test": "mocha --timeout 600000 test/**/*-test.js",
+    "test-ci": "./run-ci-tests.sh"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 # lxd
 [![Coverage Status](https://coveralls.io/repos/alanhoff/node-lxd/badge.svg?branch=master)][0]
-[![Travis](https://travis-ci.org/alanhoff/node-lxd.svg)][1]
+[![Jenkins](http://jenkins.proxima.cc/buildStatus/icon?job=node-lxd)][1]
 [![Dependencies](https://david-dm.org/alanhoff/node-lxd.svg)][2]
 
 A Node.js wrapper for LXD rest interface.
@@ -24,5 +24,5 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ```
 
 [0]: https://coveralls.io/github/alanhoff/node-lxd
-[1]: https://travis-ci.org/alanhoff/node-lxd
+[1]: http://jenkins.proxima.cc/job/node-lxd
 [2]: https://david-dm.org/alanhoff/node-lxd

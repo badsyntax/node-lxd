@@ -5,6 +5,68 @@
 
 A Node.js wrapper for LXD rest interface.
 
+## Getting started
+
+### Installation
+
+```
+npm install node-lxd --save
+```
+
+### Usage
+
+Generate keys:
+
+```
+lxc config set core.https_address 127.0.0.1
+lxc config trust add $HOME/.config/lxc/client.crt
+```
+
+Example API usage:
+
+```js
+var fs = require('fs');
+var path = require('path');
+var lxd = require('lxd');
+
+var LXD_CERT = path.resolve(process.env.HOME, '.config/lxc/client.crt');
+var LXD_KEY = path.resolve(process.env.HOME, '.config/lxc/client.key');
+var LXD_URI = 'https://127.0.0.1:8443/';
+
+var client = new lxd.LXD({
+  uri: LXD_URI,
+  client: {
+    strictSSL: false,
+    agentOptions: {
+      cert: fs.readFileSync(LXD_CERT),
+      key: fs.readFileSync(LXD_KEY)
+    }
+  }
+});
+
+client.getContainers()
+  .then(function(res) {
+    console.log(res);
+  });
+```
+
+## API Overview
+
+TODO
+
+## Testing
+
+If you're on Ubuntu and have the `lxd` package installed, you can just run `npm test`.
+
+If you're on OSX, you can use Vagrant to setup a VM to allow you to run the tests:
+
+```
+vagrant up
+vagrant ssh
+cd /vagrant
+npm test
+```
+
 ### License (ISC)
 
 ```

@@ -18,12 +18,12 @@ npm install node-lxd --save
 Set the LXD environment vars:
 
 ```
-LXD_URI=https://127.0.0.1:8443/
-LXD_CERT=$HOME/.config/lxc/client.crt
-LXD_KEY=$HOME/.config/lxc/client.key
+export LXD_URI=https://127.0.0.1:8443/
+export LXD_CERT=$HOME/.config/lxc/client.crt
+export LXD_KEY=$HOME/.config/lxc/client.key
 ```
 
-API usage:
+Example API usage:
 
 ```js
 var fs = require('fs');
@@ -47,6 +47,10 @@ client.getContainers()
   });
 ```
 
+## API Overview
+
+TODO
+
 ## Testing
 
 If you're on Ubuntu and have the `lxd` package installed, you can just run `npm test`.
@@ -56,7 +60,7 @@ If you're on OSX, you can use Vagrant to setup a VM to allow you to run the test
 ```
 vagrant up
 vagrant ssh
-/vagrant
+cd /vagrant
 npm test
 ```
 

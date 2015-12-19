@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "npm install",
-    "test": "mocha --timeout 600000 test/**/*-test.js",
-    "test-ci": "./run-ci-tests.sh"
+    "test": "sudo ./run-tests.sh"
   },
   "repository": {
     "type": "git",

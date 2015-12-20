@@ -5,7 +5,9 @@ var config = process.env;
 var client = null;
 var fs = require('fs');
 var lxd = require('../');
+
 var container = 'lxd-test-' + new Date().getTime();
+var image = 'lxd-image-' + new Date().getTime();
 
 describe('Main LXD Api endpoints', function() {
 
@@ -48,6 +50,49 @@ describe('Main LXD Api endpoints', function() {
       });
     });
 
+  });
+
+  describe('Images', function() {
+
+    // it('Should create an image', function() {
+    //   return client.createImage({
+    //     "public":   false,
+    //     "source": {
+    //         "type": "container",
+    //         "name": 'ubuntu'
+    //     },
+    //     "properties": {
+    //         "os": "Ubuntu",
+    //     }
+    //   }).then(function(res) {
+    //     expect(res.status).to.be.equal('OK');
+
+    //     console.log('IMAGE', res);
+
+    //     return client.waitOperation(res);
+    //   }).then(function() {
+    //     console.log(arguments);
+    //   });
+    // });
+
+    it('Should list images', function() {
+      return client.getImages().then(function(res) {
+        expect(res.status).to.be.equal('Success');
+        expect(Boolean(res.metadata.length)).to.be.equal(true);
+      });
+    });
+
+    it('Should get an image\'s info', function() {
+    });
+  });
+
+  describe('Profiles', function() {
+    it('Should list profiles', function() {
+      return client.getProfiles().then(function(res) {
+        expect(res.status).to.be.equal('Success');
+        expect(Boolean(res.metadata.length)).to.be.equal(true);
+      });
+    })
   });
 
   describe('Container manipulation', function() {
@@ -112,6 +157,5 @@ describe('Main LXD Api endpoints', function() {
     });
 
   });
-
 
 });

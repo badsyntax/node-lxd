@@ -54,26 +54,24 @@ describe('Main LXD Api endpoints', function() {
 
   describe('Images', function() {
 
-    // it('Should create an image', function() {
-    //   return client.createImage({
-    //     "public":   false,
-    //     "source": {
-    //         "type": "container",
-    //         "name": 'ubuntu'
-    //     },
-    //     "properties": {
-    //         "os": "Ubuntu",
-    //     }
-    //   }).then(function(res) {
-    //     expect(res.status).to.be.equal('OK');
-
-    //     console.log('IMAGE', res);
-
-    //     return client.waitOperation(res);
-    //   }).then(function() {
-    //     console.log(arguments);
-    //   });
-    // });
+    it('Should create an image', function() {
+      return client.createImage({
+        "public": false,
+        "alias": "foo",
+        "source": {
+          "type": "image",
+          "mode": "pull",
+          "server": "https://images.linuxcontainers.org",
+          "alias": "ubuntu/trusty/amd64"
+        }
+      }).then(function(res) {
+        expect(res.status).to.be.equal('OK');
+        return client.waitOperation(res);
+      }).then(function(operation) {
+        var metadata = JSON.parse(operation).metadata;
+        expect(metadata.status_code).to.be.equal(200);
+      });
+    });
 
     it('Should list images', function() {
       return client.getImages().then(function(res) {
@@ -103,7 +101,7 @@ describe('Main LXD Api endpoints', function() {
         profiles: ['default'],
         source: {
           type: 'image',
-          alias: 'ubuntu'
+          alias: 'ubuntu/trusty/amd64'
         }
       }).then(function(res) {
         expect(res.status).to.be.equal('OK');
